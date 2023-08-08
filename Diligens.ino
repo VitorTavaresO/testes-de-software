@@ -1,10 +1,10 @@
 void setup() {
-  pinMode(15, OUTPUT);
+  pinMode(2, INPUT);
+  Serial.begin(115200);
 }
 
 void loop() {
-  digitalWrite(15, HIGH);  
-  delay(500);
-  digitalWrite(15, LOW);
-  delay(500);
+  int val = analogRead(2);
+  Serial.println(val);
+  delay(1000);
 }
