@@ -10,7 +10,7 @@ void setup() {
 }
 
 void loop() {
-  int val = analogRead(HUMIDITY);
+  int val = map(analogRead(HUMIDITY), 0, 4095, 0, 100);
   Serial.println(val);
-  delay(60000);
+  delay(1000);
 }
