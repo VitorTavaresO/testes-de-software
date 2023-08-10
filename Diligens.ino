@@ -20,7 +20,10 @@ void setup() {
 }
 
 void loop() {
-  int val = map(analogRead(HUMIDITY), 0, 4095, 0, 100);
-  Serial.println(val);
+  int val = map(analogRead(HUMIDITY), 0, 4095, 0, 99);
+  lcd.setCursor(10,0);
+  lcd.print(val);
+  lcd.setCursor(12,0);
+  lcd.print("%");
   delay(1000);
 }
