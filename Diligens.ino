@@ -1,6 +1,6 @@
 #include <LiquidCrystal_I2C.h>
 LiquidCrystal_I2C lcd(0x27, 20, 4);
-#define HUMIDITY 2
+#define HUMIDITY 34
 #define TEMPERATURE 13
 #define BUZZER 18
 
@@ -24,8 +24,9 @@ void setup() {
 }
 
 void loop() {
-  int humidity_output = map(analogRead(HUMIDITY), 0, 4095, 0, 99);
+  int humidity_output = map(analogRead(HUMIDITY), 0, 4095, 99, 0);
   int temperature_output = map(analogRead(TEMPERATURE), 0, 4095, 0, 100);
+  Serial.println(humidity_output);
   if(humidity_output < 20){
     analogWrite(BUZZER, 255);
     lcd.setCursor(0,3);
