@@ -1,15 +1,16 @@
 import re
+from src.messages import PasswordValidatorMessages
 
 class PasswordValidator:
     def __init__(self):
         self.erros = []
         self.validation_patterns = [
-            (re.compile(r'.{8,}'), "The password must be at least 8 characters long"),
-            (re.compile(r'[A-Z]'), "The password must contain at least one uppercase letter"),
-            (re.compile(r'[a-z]'), "The password must contain at least one lowercase letter"),
-            (re.compile(r'[0-9]'), "The password must contain at least one number"),
-            (re.compile(r'[!@#$%^&*()\-_=+\[\]{};:,.<>?/]'), "The password must contain at least one special character"),
-            (re.compile(r'^[^ ]+$'), "The password must not contain blank spaces")
+            (re.compile(r'.{8,}'), PasswordValidatorMessages.ERROR_TOO_SHORT),
+            (re.compile(r'[A-Z]'), PasswordValidatorMessages.ERROR_NO_UPPERCASE),
+            (re.compile(r'[a-z]'), PasswordValidatorMessages.ERROR_NO_LOWERCASE),
+            (re.compile(r'[0-9]'), PasswordValidatorMessages.ERROR_NO_NUMBER),
+            (re.compile(r'[!@#$%^&*()\-_=+\[\]{};:,.<>?/]'), PasswordValidatorMessages.ERROR_NO_SPECIAL_CHAR),
+            (re.compile(r'^[^ ]+$'), PasswordValidatorMessages.ERROR_HAS_SPACES),
         ]
 
     def get_errors(self):

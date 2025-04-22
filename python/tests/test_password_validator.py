@@ -1,5 +1,6 @@
 import pytest
 from src.password_validator import PasswordValidator
+from src.messages import PasswordValidatorMessages
 
 def test_password_with_less_than_8_characters():
     validator = PasswordValidator()
@@ -8,7 +9,7 @@ def test_password_with_less_than_8_characters():
     result = validator.validate(password)
     
     assert result is False
-    assert "The password must be at least 8 characters long" in validator.get_errors()
+    assert PasswordValidatorMessages.ERROR_TOO_SHORT in validator.get_errors()
 
 def test_password_without_uppercase():
     validator = PasswordValidator()
@@ -17,7 +18,7 @@ def test_password_without_uppercase():
     result = validator.validate(password)
     
     assert result is False
-    assert "The password must contain at least one uppercase letter" in validator.get_errors()
+    assert PasswordValidatorMessages.ERROR_NO_UPPERCASE in validator.get_errors()
 
 def test_password_without_lowercase():
     validator = PasswordValidator()
@@ -26,7 +27,7 @@ def test_password_without_lowercase():
     result = validator.validate(password)
     
     assert result is False
-    assert "The password must contain at least one lowercase letter" in validator.get_errors()
+    assert PasswordValidatorMessages.ERROR_NO_LOWERCASE in validator.get_errors()
 
 def test_password_without_number():
     validator = PasswordValidator()
@@ -35,7 +36,7 @@ def test_password_without_number():
     result = validator.validate(password)
     
     assert result is False
-    assert "The password must contain at least one number" in validator.get_errors()
+    assert PasswordValidatorMessages.ERROR_NO_NUMBER in validator.get_errors()
 
 def test_password_without_special_character():
     validator = PasswordValidator()
@@ -44,7 +45,7 @@ def test_password_without_special_character():
     result = validator.validate(password)
     
     assert result is False
-    assert "The password must contain at least one special character" in validator.get_errors()
+    assert PasswordValidatorMessages.ERROR_NO_SPECIAL_CHAR in validator.get_errors()
 
 def test_password_with_blank_space():
     validator = PasswordValidator()
@@ -53,7 +54,7 @@ def test_password_with_blank_space():
     result = validator.validate(password)
     
     assert result is False
-    assert "The password must not contain blank spaces" in validator.get_errors()
+    assert PasswordValidatorMessages.ERROR_HAS_SPACES in validator.get_errors()
 
 def test_valid_password():
     validator = PasswordValidator()
@@ -71,10 +72,10 @@ def test_password_with_multiple_errors():
     result = validator.validate(password)
     
     assert result is False
-    assert "The password must be at least 8 characters long" in validator.get_errors()
-    assert "The password must contain at least one uppercase letter" in validator.get_errors()
-    assert "The password must contain at least one number" in validator.get_errors()
-    assert "The password must contain at least one special character" in validator.get_errors()
+    assert PasswordValidatorMessages.ERROR_TOO_SHORT in validator.get_errors()
+    assert PasswordValidatorMessages.ERROR_NO_UPPERCASE in validator.get_errors()
+    assert PasswordValidatorMessages.ERROR_NO_NUMBER in validator.get_errors()
+    assert PasswordValidatorMessages.ERROR_NO_SPECIAL_CHAR in validator.get_errors()
     
 def test_empty_password():
     validator = PasswordValidator()
@@ -83,4 +84,4 @@ def test_empty_password():
     result = validator.validate(password)
     
     assert result is False
-    assert "The password must be at least 8 characters long" in validator.get_errors()
+    assert PasswordValidatorMessages.ERROR_TOO_SHORT in validator.get_errors()
